@@ -4,3 +4,12 @@ server:
 spring:
   application:
     name: oj-system
+  datasource:
+    url: jdbc:mysql://localhost:3306/chaseoj_dev?useUnicode=true&characterEncoding=utf8&userSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: zqq13127837702
+    hikari:
+      minimum-idle: 5 #最小空闲连接数
+      maximum-pool-size: 20 #最大连接数
+      idle-timeout: 3000 #空闲连接存活时间（毫秒）
+      connection-timeout: 3000 #连接超时时间（毫秒）
