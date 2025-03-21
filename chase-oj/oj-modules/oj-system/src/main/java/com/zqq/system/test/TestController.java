@@ -2,6 +2,8 @@ package com.zqq.system.test;
 
 import com.zqq.common.core.domain.R;
 import com.zqq.common.core.enums.ResultCode;
+import com.zqq.redis.service.RedisService;
+import com.zqq.system.domain.SysUser;
 import com.zqq.system.test.domain.TestLoginDTO;
 import com.zqq.system.test.service.impl.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,22 @@ public class TestController {
         result.setData("apifox"+testLoginDTO.getUserAccount()+";"+testLoginDTO.getPassword());
         return result;
     }
+
+
+    @Autowired
+    private RedisService redisService;
+    @GetMapping("/addRedis")
+    public String addRedis(){
+        SysUser user=new SysUser();
+        user.setUserAccount("redisTest");
+        redisService.setCacheObject("u",user);
+        SysUser u = redisService.getCacheObject("u", SysUser.class);
+        return u.toString();
+    }
+
+
+
+
+
 
 }

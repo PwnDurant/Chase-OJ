@@ -15,6 +15,7 @@
         <module name="oj-api" />
         <module name="oj-job" />
         <module name="oj-common-security" />
+        <module name="oj-common-redis" />
         <module name="oj-gateway" />
       </profile>
     </annotationProcessing>
@@ -24,6 +25,7 @@
       <module name="oj-api" options="-parameters" />
       <module name="oj-common" options="" />
       <module name="oj-common-core" options="-parameters" />
+      <module name="oj-common-redis" options="-parameters" />
       <module name="oj-common-security" options="-parameters" />
       <module name="oj-common-swagger" options="-parameters" />
       <module name="oj-friend" options="-parameters" />
