@@ -1,4 +1,4 @@
-package com.zqq.system.domain;
+package com.zqq.system.domain.dto;
 
 import lombok.Data;
 

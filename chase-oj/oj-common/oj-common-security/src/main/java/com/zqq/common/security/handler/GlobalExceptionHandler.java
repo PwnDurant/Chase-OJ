@@ -1,6 +1,8 @@
 package com.zqq.common.security.handler;
 
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.zqq.common.core.domain.R;
 import com.zqq.common.core.enums.ResultCode;
 import com.zqq.common.security.exception.ServiceException;
@@ -34,29 +36,29 @@ public class GlobalExceptionHandler {
         return R.fail(ResultCode.ERROR);
     }
 
-//    @ExceptionHandler(ServiceException.class)
-//    public R<?> handleServiceException(ServiceException e, HttpServletRequest request) {
-//        String requestURI = request.getRequestURI();
-//        ResultCode resultCode = e.getResultCode();
-//        log.error("请求地址'{}',发生业务异常: {}", requestURI, resultCode.getMsg(), e);
-//        return R.fail(resultCode);
-//    }
+    @ExceptionHandler(ServiceException.class)
+    public R<?> handleServiceException(ServiceException e, HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        ResultCode resultCode = e.getResultCode();
+        log.error("请求地址'{}',发生业务异常: {}", requestURI, resultCode.getMsg());
+        return R.fail(resultCode);
+    }
 
-//    @ExceptionHandler(BindException.class)
-//    public R<Void> handleBindException(BindException e) {
-//        log.error(e.getMessage());
-//        String message = join(e.getAllErrors(),
-//                DefaultMessageSourceResolvable::getDefaultMessage, ", ");
-//        return R.fail(ResultCode.FAILED_PARAMS_VALIDATE.getCode(), message);
-//    }
+    @ExceptionHandler(BindException.class)
+    public R<Void> handleBindException(BindException e) {
+        log.error(e.getMessage());
+        String message = join(e.getAllErrors(),
+                DefaultMessageSourceResolvable::getDefaultMessage, ", ");
+        return R.fail(ResultCode.FAILED_PARAMS_VALIDATE.getCode(), message);
+    }
 
-//    private <E> String join(Collection<E> collection, Function<E, String>
-//            function, CharSequence delimiter) {
-//        if (CollUtil.isEmpty(collection)) {
-//            return StrUtil.EMPTY;
-//        }
-//        return collection.stream().map(function).filter(Objects::nonNull).collect(Collectors.joining(delimiter));
-//    }
+    private <E> String join(Collection<E> collection, Function<E, String>
+            function, CharSequence delimiter) {
+        if (CollUtil.isEmpty(collection)) {
+            return StrUtil.EMPTY;
+        }
+        return collection.stream().map(function).filter(Objects::nonNull).collect(Collectors.joining(delimiter));
+    }
 
     /**
      * 拦截运行时异常

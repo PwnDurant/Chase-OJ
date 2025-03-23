@@ -1,11 +1,15 @@
 package com.zqq.system.controller;
 
 
+import com.zqq.common.core.constants.HttpConstants;
+import com.zqq.common.core.controller.BaseController;
+import com.zqq.common.core.domain.LoginUser;
 import com.zqq.common.core.domain.R;
+import com.zqq.common.core.domain.vo.LoginUserVO;
 import com.zqq.common.swagger.SwaggerConfig;
-import com.zqq.system.domain.LoginDTO;
-import com.zqq.system.domain.SysUserSaveDTO;
-import com.zqq.system.domain.SysUserVO;
+import com.zqq.system.domain.dto.LoginDTO;
+import com.zqq.system.domain.dto.SysUserSaveDTO;
+import com.zqq.system.domain.vo.SysUserVO;
 import com.zqq.system.service.ISysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/SysUser")
 @Tag(name = "管理员接口")
-public class SysUserController {
+public class SysUserController extends BaseController {
 
     @Resource(name = "sysUserServiceImpl")
     private ISysUserService sysUserService;
@@ -42,6 +46,16 @@ public class SysUserController {
         return sysUserService.login(loginDTO.getUserAccount(), loginDTO.getPassword());
     }
 
+    @DeleteMapping("/logout")
+    public R<Void> logout(@RequestHeader(HttpConstants.AUTHENTICATION) String token){
+        return toR(sysUserService.logout(token));
+    }
+
+    @GetMapping("/info")
+    public R<LoginUserVO> info(@RequestHeader(HttpConstants.AUTHENTICATION) String token){
+        return sysUserService.info(token);
+    }
+
 //    管理员的增删改查
 
 //    新增
@@ -51,7 +65,7 @@ public class SysUserController {
     @ApiResponse(responseCode = "2000",description = "服务器繁忙请稍后重试")
     @ApiResponse(responseCode = "3101",description = "用户已存在")
     public R<Void> add(@RequestBody SysUserSaveDTO sysUserSaveDTO){
-        return null;
+        return toR(sysUserService.add(sysUserSaveDTO));
     }
 
 
