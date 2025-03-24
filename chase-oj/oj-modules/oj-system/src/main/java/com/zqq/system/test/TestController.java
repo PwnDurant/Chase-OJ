@@ -3,7 +3,7 @@ package com.zqq.system.test;
 import com.zqq.common.core.domain.R;
 import com.zqq.common.core.enums.ResultCode;
 import com.zqq.redis.service.RedisService;
-import com.zqq.system.domain.SysUser;
+import com.zqq.system.domain.sysuser.SysUser;
 import com.zqq.system.test.domain.TestLoginDTO;
 import com.zqq.system.test.domain.VaDTO;
 import com.zqq.system.test.service.impl.TestService;
