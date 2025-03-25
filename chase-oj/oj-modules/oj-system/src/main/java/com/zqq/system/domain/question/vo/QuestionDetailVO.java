@@ -1,26 +1,22 @@
 package com.zqq.system.domain.question.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
-public class QuestionVO {
+public class QuestionDetailVO {
 
     @JsonSerialize(using = ToStringSerializer.class)
     private Long questionId;
-
     private String title;
-
     private Integer difficulty;
-
-    private String createName;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createTime;
+    private Long timeLimit;
+    private Long spaceLimit;
+    private String content;
+    private String questionCase;
+    private String defaultCode;
+    private String mainFuc;
 }

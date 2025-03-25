@@ -1,9 +1,103 @@
-11:52:59.963 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-14:08:36.926 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-15:15:23.226 [nacos-grpc-client-executor-localhost-570] ERROR c.a.n.c.r.c.g.GrpcClient - [printIfErrorEnabled,102] - [1742796516344_192.168.65.1_28735]Request stream onCompleted, switch server
-19:24:18.192 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-19:55:43.999 [reactor-http-nio-7] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [2407c205-3]  500 Server Error for HTTP GET "/system/SysUser/info"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+12:21:45.560 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+13:09:04.718 [reactor-http-nio-2] ERROR c.z.g.f.AuthFilter - [unauthorizedResponse,167] - [鉴权异常处理]请求路径:/system/question/list
+13:11:23.060 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+15:17:39.737 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+16:07:44.016 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+19:26:10.605 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+20:09:40.136 [reactor-http-nio-10] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [a2dbcdd1-12]  500 Server Error for HTTP POST "/system/question/add"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/system/question/add" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+		at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:842)
+20:09:40.173 [reactor-http-nio-9] ERROR r.c.p.Operators - [error,324] - Operator called default onErrorDropped
+org.springframework.core.codec.DecodingException: Could not find end of body (␍␊------WebKitFormBoundaryMZZZF5nunQAPQtln)
+	at org.springframework.http.codec.multipart.MultipartParser$BodyState.onComplete(MultipartParser.java:609)
+	at org.springframework.http.codec.multipart.MultipartParser.hookOnComplete(MultipartParser.java:125)
+	at reactor.core.publisher.BaseSubscriber.onComplete(BaseSubscriber.java:197)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.netty.channel.FluxReceive.disposeAndUnsubscribeReceiver(FluxReceive.java:499)
+	at reactor.netty.channel.FluxReceive.lambda$new$0(FluxReceive.java:89)
+	at reactor.netty.channel.FluxReceive.cancelReceiver(FluxReceive.java:199)
+	at reactor.netty.channel.FluxReceive.doCancel(FluxReceive.java:205)
+	at reactor.netty.channel.FluxReceive.dispose(FluxReceive.java:121)
+	at reactor.netty.channel.ChannelOperations.discard(ChannelOperations.java:373)
+	at reactor.netty.http.server.HttpServerOperations.cleanHandlerTerminate(HttpServerOperations.java:730)
+	at reactor.netty.http.server.HttpTrafficHandler.operationComplete(HttpTrafficHandler.java:434)
+	at reactor.netty.http.server.HttpTrafficHandler.operationComplete(HttpTrafficHandler.java:63)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105)
+	at io.netty.util.internal.PromiseNotificationUtil.trySuccess(PromiseNotificationUtil.java:48)
+	at io.netty.channel.ChannelOutboundBuffer.safeSuccess(ChannelOutboundBuffer.java:717)
+	at io.netty.channel.ChannelOutboundBuffer.remove(ChannelOutboundBuffer.java:272)
+	at io.netty.channel.ChannelOutboundBuffer.removeBytes(ChannelOutboundBuffer.java:352)
+	at io.netty.channel.socket.nio.NioSocketChannel.doWrite(NioSocketChannel.java:421)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.flush0(AbstractChannel.java:931)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.flush0(AbstractNioChannel.java:354)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.flush(AbstractChannel.java:895)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.flush(DefaultChannelPipeline.java:1372)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeFlush0(AbstractChannelHandlerContext.java:921)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeFlush(AbstractChannelHandlerContext.java:907)
+	at io.netty.channel.AbstractChannelHandlerContext.flush(AbstractChannelHandlerContext.java:893)
+	at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.flush(CombinedChannelDuplexHandler.java:531)
+	at io.netty.channel.ChannelOutboundHandlerAdapter.flush(ChannelOutboundHandlerAdapter.java:125)
+	at io.netty.channel.CombinedChannelDuplexHandler.flush(CombinedChannelDuplexHandler.java:356)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeFlush0(AbstractChannelHandlerContext.java:923)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeFlush(AbstractChannelHandlerContext.java:907)
+	at io.netty.channel.AbstractChannelHandlerContext.flush(AbstractChannelHandlerContext.java:893)
+	at io.netty.channel.ChannelDuplexHandler.flush(ChannelDuplexHandler.java:127)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeFlush0(AbstractChannelHandlerContext.java:923)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:941)
+	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1247)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+20:09:45.232 [reactor-http-nio-11] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [3439966b-13]  500 Server Error for HTTP POST "/system/question/add"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP POST "/system/question/add" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+		at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:842)
+20:11:34.839 [reactor-http-nio-3] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [e6bed377-15]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
@@ -21,8 +115,46 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:55:59.933 [reactor-http-nio-8] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [5ff5cf52-4]  500 Server Error for HTTP GET "/system/SysUser/info"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:11:34.839 [reactor-http-nio-4] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [666811a3-14]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+		at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:842)
+20:12:11.191 [reactor-http-nio-8] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [5607e921-16]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+		at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:842)
+20:12:11.191 [reactor-http-nio-7] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [3d0ace69-17]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
@@ -40,8 +172,27 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:57:23.879 [reactor-http-nio-10] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [3f8cde41-5]  500 Server Error for HTTP GET "/system/SysUser/info"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:12.929 [reactor-http-nio-10] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [a6777112-19]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
+		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
+		at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:842)
+20:12:12.929 [reactor-http-nio-9] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [2959a390-18]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
@@ -59,13 +210,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:57:37.572 [reactor-http-nio-11] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [0c536806-6]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:17.929 [reactor-http-nio-11] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [a912d6b5-20]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -78,13 +229,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:57:38.273 [reactor-http-nio-1] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [b4008346-7]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:26.430 [reactor-http-nio-1] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [af1f52d1-22]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/SysUser/info" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -97,13 +248,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:57:38.474 [reactor-http-nio-2] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [f285850a-8]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:26.430 [reactor-http-nio-2] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [e66eb207-21]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -116,13 +267,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:57:38.668 [reactor-http-nio-3] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [bc9a6ba0-9]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:26.726 [reactor-http-nio-4] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [031fee1f-23]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -135,13 +286,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:10.829 [reactor-http-nio-5] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [f16d93c0-10]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:26.726 [reactor-http-nio-3] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [6765e2cd-24]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/SysUser/info" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -154,13 +305,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:11.496 [reactor-http-nio-6] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [d5f5a3ce-11]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:29.632 [reactor-http-nio-5] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [42932b3b-25]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/SysUser/info" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -173,13 +324,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:24.533 [reactor-http-nio-7] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [21504346-12]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:30.564 [reactor-http-nio-6] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [514aaf5d-26]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -192,13 +343,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:25.246 [reactor-http-nio-8] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [d6c5b4f0-13]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:43.557 [reactor-http-nio-7] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [3382c3cb-27]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/SysUser/info" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -211,13 +362,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:25.611 [reactor-http-nio-9] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [8ff6b9e0-14]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:43.557 [reactor-http-nio-8] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [d8ad1221-28]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -230,13 +381,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:26.073 [reactor-http-nio-10] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [7acd64ea-15]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:44.324 [reactor-http-nio-9] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [df9c40f5-29]  500 Server Error for HTTP GET "/system/SysUser/info"
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/SysUser/info" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -249,13 +400,13 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:26.265 [reactor-http-nio-11] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [ce9096f3-16]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
+20:12:44.324 [reactor-http-nio-10] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [559eb324-30]  500 Server Error for HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title="
+io.netty.channel.ConnectTimeoutException: connection timed out: /172.20.10.3:9201
 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
 Error has been observed at the following site(s):
 	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
+	*__checkpoint ⇢ HTTP GET "/system/question/list?pageNum=1&pageSize=10&difficulty=&title=" [ExceptionHandlingWebHandler]
 Original Stack Trace:
 		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
 		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
@@ -268,46 +419,3 @@ Original Stack Trace:
 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:26.455 [reactor-http-nio-1] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [b84db26e-17]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
-	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
-Error has been observed at the following site(s):
-	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
-Original Stack Trace:
-		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
-		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
-		at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
-		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
-		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
-		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
-		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
-		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:29.541 [reactor-http-nio-2] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [error,102] - [1a9f831e-18]  500 Server Error for HTTP POST "/system/SysUser/login"
-io.netty.channel.ConnectTimeoutException: connection timed out: /192.168.43.195:9201
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
-	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
-Error has been observed at the following site(s):
-	*__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__checkpoint ⇢ HTTP POST "/system/SysUser/login" [ExceptionHandlingWebHandler]
-Original Stack Trace:
-		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:261)
-		at io.netty.util.concurrent.PromiseTask.runTask(PromiseTask.java:98)
-		at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:153)
-		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
-		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
-		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
-		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
-		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-		at java.base/java.lang.Thread.run(Thread.java:842)
-19:59:40.654 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-21:49:46.106 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-21:57:53.406 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-22:44:50.021 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-22:57:13.854 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders - [<clinit>,79] - Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
