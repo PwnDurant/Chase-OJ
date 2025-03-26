@@ -24,6 +24,7 @@ public class QuestionController extends BaseController {
     private IQuestionService questionService;
 
 
+
     @GetMapping("/list")
     public TableDataInfo list(QuestionQueryDTO questionQueryDTO){
          return getTableDataInfo(questionService.list(questionQueryDTO));

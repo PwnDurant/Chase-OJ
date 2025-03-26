@@ -1,7 +1,7 @@
-package com.zqq.system.domain.question.vo;
+package com.zqq.system.domain.exam.vo;
+
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Getter;
@@ -11,17 +11,22 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class QuestionVO {
-
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long questionId;
+public class ExamVO {
 
     private String title;
 
-    private Integer difficulty;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endTime;
+
+    private Integer status;
 
     private String createName;
+
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long examId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
