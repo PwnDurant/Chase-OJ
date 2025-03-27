@@ -19,6 +19,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.zqq</groupId>
+            <artifactId>oj-common-message</artifactId>
+            <version>${oj-common-message.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

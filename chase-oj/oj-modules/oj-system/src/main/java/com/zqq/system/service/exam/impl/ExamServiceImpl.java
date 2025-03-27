@@ -53,8 +53,8 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
 
 //        将信息添加到exam数据库中
         Exam exam=new Exam();
-        checkExam(exam);
         BeanUtil.copyProperties(examAddDTO,exam);
+        checkExam(exam);
         examMapper.insert(exam);
         return exam.getExamId().toString();
     }
@@ -150,6 +150,14 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
             throw new ServiceException(ResultCode.EXAM_NOT_HAS_QUESTION);
         }
         exam.setStatus(Constants.TRUE);
+        return examMapper.updateById(exam);
+    }
+
+    @Override
+    public int cancelPublish(Long examId) {
+        Exam exam = getExam(examId);
+        checkExam(exam);
+        exam.setStatus(Constants.FALSE);
         return examMapper.updateById(exam);
     }
 

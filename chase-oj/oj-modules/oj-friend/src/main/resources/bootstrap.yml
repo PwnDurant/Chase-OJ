@@ -1,6 +1,14 @@
-server:
-  port: 9204
-
 spring:
   application:
     name: oj-friend
+  profiles:
+    active: local
+  cloud:
+    nacos:
+      discovery:
+        namespace: af3eed34-40c9-4223-93e2-328de23812b0
+        server-addr: http://localhost:8848
+      config:
+        namespace: af3eed34-40c9-4223-93e2-328de23812b0
+        server-addr: http://localhost:8848
+        file-extension: yaml

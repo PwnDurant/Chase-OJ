@@ -21,7 +21,9 @@ public class Exam extends BaseEntity {
 
     private String title;
 
+
     private LocalDateTime startTime;
+
 
     private LocalDateTime endTime;
 
