@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/exam")
 public class ExamController extends BaseController {
 
+
     @Autowired
     private IExamService examService;
 
@@ -51,6 +52,12 @@ public class ExamController extends BaseController {
         return toR(examService.questionAdd(examQuestionAddDTO));
     }
 
+    /**
+     * 删除竞赛中的题目
+     * @param examId 竞赛Id
+     * @param questionId 题目Id
+     * @return
+     */
     @DeleteMapping("/question/delete")
     public R<Void> questionDelete(Long examId,Long questionId){
         return toR(examService.questionDelete(examId,questionId));
@@ -74,6 +81,24 @@ public class ExamController extends BaseController {
     @PutMapping("/edit")
     public R<Void> edit(@RequestBody ExamEditDTO examEditDTO){
         return toR(examService.edit(examEditDTO));
+    }
+
+    /**
+     * 删除竞赛
+     * @param examId 竞赛Id
+     * @return
+     */
+    @DeleteMapping("/delete")
+    public R<Void> delete(Long examId){
+        return toR(examService.delete(examId));
+    }
+
+    /**
+     * 发布竞赛
+     */
+    @PutMapping("/publish")
+    public R<Void> publish(Long examId){
+        return toR(examService.publish(examId));
     }
 
 

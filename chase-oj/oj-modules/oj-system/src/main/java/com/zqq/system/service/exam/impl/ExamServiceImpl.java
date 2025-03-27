@@ -3,9 +3,9 @@ package com.zqq.system.service.exam.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
+import com.zqq.common.core.constants.Constants;
 import com.zqq.common.core.enums.ResultCode;
 import com.zqq.common.security.exception.ServiceException;
 import com.zqq.system.domain.exam.Exam;
@@ -129,6 +129,28 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
         return examQuestionMapper.delete(new LambdaQueryWrapper<ExamQuestion>()
                 .eq(ExamQuestion::getExamId, examId)
                 .eq(ExamQuestion::getQuestionId,questionId));
+    }
+
+    @Override
+    public int delete(Long examId) {
+        Exam exam = getExam(examId);
+        checkExam(exam);
+        examQuestionMapper.delete(new LambdaQueryWrapper<ExamQuestion>().eq(ExamQuestion::getExamId,examId));
+//        因为我在exam实体类中在examId上面加上了主键策略，所以在执行的时候会自动识别类中的主体
+        return examMapper.deleteById(exam);
+    }
+
+    @Override
+    public int publish(Long examId) {
+//        判断竞赛是否存在
+        Exam exam = getExam(examId);
+        Long count = examQuestionMapper.selectCount(new LambdaQueryWrapper<ExamQuestion>()
+                .eq(ExamQuestion::getExamId, examId));
+        if(count==null||count<=0){
+            throw new ServiceException(ResultCode.EXAM_NOT_HAS_QUESTION);
+        }
+        exam.setStatus(Constants.TRUE);
+        return examMapper.updateById(exam);
     }
 
     private void checkExam(Exam exam) {
