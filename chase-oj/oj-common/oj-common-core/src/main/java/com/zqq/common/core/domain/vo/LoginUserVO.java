@@ -10,4 +10,6 @@ public class LoginUserVO {
 
     private String nickName;
 
+    private String headImage;
+
 }

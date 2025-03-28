@@ -25,6 +25,10 @@ public enum ResultCode {
     FAILED_USER_BANNED              (31004,"您已被列入黑名单，请联系管理员"),
     FAILED_USER_PHONE               (31005,"您输入的手机号码有误"),
     FAILED_FREQUENT                 (31006,"操作频繁，请稍后重试"),
+    FAILED_TIME_LIMIT               (31007,"当天请求次数已经达到上限"),
+    FAILED_SEND_CODE                (31008,"发送验证码失败"),
+    FAILED_INVALID_CODE             (31009,"验证码无效"),
+    FAILED_ERROR_CODE                (31010,"验证码错误"),
 
     EXAM_START_TIME_BEFORE_CURRENT_TIME(3201,"竞赛开始时间不能早于当前时间"),
     EXAM_START_TIME_AFTER_END_TIME(3202,"竞赛开始时间不能晚于竞赛结束时间"),

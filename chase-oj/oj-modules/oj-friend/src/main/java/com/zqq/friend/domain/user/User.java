@@ -1,4 +1,4 @@
-package com.zqq.friend.domain;
+package com.zqq.friend.domain.user;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

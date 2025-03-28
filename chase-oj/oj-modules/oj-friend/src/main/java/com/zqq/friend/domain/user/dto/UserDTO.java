@@ -1,4 +1,4 @@
-package com.zqq.friend.domain.dto;
+package com.zqq.friend.domain.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
     private String phone;
+    private String code;
 }
