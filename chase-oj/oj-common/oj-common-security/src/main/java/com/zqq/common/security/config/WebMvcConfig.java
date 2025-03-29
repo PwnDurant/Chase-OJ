@@ -16,7 +16,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(tokenInterceptor)
-                .excludePathPatterns("/**/login","/**/test/**","/**/sendCode/**")
+                .excludePathPatterns("/**/login","/**/test/**","/**/sendCode/**","/**/semiLogin/**")
                 .addPathPatterns("/**");
     }
 }

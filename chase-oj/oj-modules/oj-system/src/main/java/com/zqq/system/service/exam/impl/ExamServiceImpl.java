@@ -18,6 +18,7 @@ import com.zqq.system.domain.exam.vo.ExamDetailVO;
 import com.zqq.system.domain.exam.vo.ExamVO;
 import com.zqq.system.domain.question.Question;
 import com.zqq.system.domain.question.vo.QuestionVO;
+import com.zqq.system.manage.ExamCacheManage;
 import com.zqq.system.mapper.exam.ExamMapper;
 import com.zqq.system.mapper.exam.ExamQuestionMapper;
 import com.zqq.system.mapper.question.QuestionMapper;
@@ -39,6 +40,8 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
     private QuestionMapper questionMapper;
     @Autowired
     private ExamQuestionMapper examQuestionMapper;
+    @Autowired
+    private ExamCacheManage examCacheManage;
 
     @Override
     public List<ExamVO> list(ExamQueryDTO examQueryDTO) {
@@ -144,20 +147,32 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
     public int publish(Long examId) {
 //        判断竞赛是否存在
         Exam exam = getExam(examId);
+//        对于已经完赛的竞赛不允许调用
+        if(exam.getEndTime().isBefore(LocalDateTime.now())){
+            throw new ServiceException(ResultCode.EXAM_IS_FINISH);
+        }
         Long count = examQuestionMapper.selectCount(new LambdaQueryWrapper<ExamQuestion>()
                 .eq(ExamQuestion::getExamId, examId));
         if(count==null||count<=0){
             throw new ServiceException(ResultCode.EXAM_NOT_HAS_QUESTION);
         }
         exam.setStatus(Constants.TRUE);
+
+//        将新发布竞赛存储再redis中   e:t:l  e:d:examId
+        examCacheManage.addCache(exam);
+
         return examMapper.updateById(exam);
     }
 
     @Override
     public int cancelPublish(Long examId) {
         Exam exam = getExam(examId);
+        if(exam.getEndTime().isBefore(LocalDateTime.now())){
+            throw new ServiceException(ResultCode.EXAM_IS_FINISH);
+        }
         checkExam(exam);
         exam.setStatus(Constants.FALSE);
+        examCacheManage.deleteCache(examId);
         return examMapper.updateById(exam);
     }
 

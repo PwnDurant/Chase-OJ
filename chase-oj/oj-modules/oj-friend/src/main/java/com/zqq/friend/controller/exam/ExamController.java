@@ -22,9 +22,14 @@ public class ExamController extends BaseController {
      * @param examQueryDTO 传入的是：标题，开始时间，结束时间，第几页（1），每页个数（10）
      * @return
      */
-    @GetMapping("/list")
+    @GetMapping("/semiLogin/list")
     public TableDataInfo list(ExamQueryDTO examQueryDTO){
         return getTableDataInfo(examService.list(examQueryDTO));
+    }
+
+    @GetMapping("/semiLogin/redis/list")
+    public TableDataInfo redisList(ExamQueryDTO examQueryDTO){
+        return examService.redisList(examQueryDTO);
     }
 
 

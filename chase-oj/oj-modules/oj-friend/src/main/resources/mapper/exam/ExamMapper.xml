@@ -6,13 +6,14 @@
 
     <select id="selectExamList" resultType="com.zqq.friend.domain.exam.vo.ExamVO">
         SELECT
-        te.exam_id,
-        te.title,
-        te.start_time,
-        te.end_time,
+            te.exam_id,
+            te.title,
+            te.start_time,
+            te.end_time
         FROM
-        tb_exam te
-        <where>
+            tb_exam te
+        where
+            status = 1
             <if test="title !=null and title !='' ">
                 AND te.title LIKE CONCAT('%',#{title},'%')
             </if>
@@ -22,9 +23,13 @@
             <if test="endTime != null and endTime != ''">
                 AND te.end_time &lt;= #{endTime}
             </if>
-
-        </where>
+            <if test="type == 0">
+                And te.end_time > NOW()
+            </if>
+            <if test="type == 1">
+                And te.end_time &lt;= NOW()
+            </if>
         ORDER BY
-        te.create_time DESC
+            te.create_time DESC
     </select>
 </mapper>

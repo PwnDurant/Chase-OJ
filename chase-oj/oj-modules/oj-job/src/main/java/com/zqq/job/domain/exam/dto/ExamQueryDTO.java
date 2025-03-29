@@ -1,10 +1,8 @@
-package com.zqq.friend.domain.exam.dto;
+package com.zqq.job.domain.exam.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zqq.common.core.domain.PageQueryDTO;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
 
 
 @Getter
