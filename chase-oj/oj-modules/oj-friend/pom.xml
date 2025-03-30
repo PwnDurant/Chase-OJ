@@ -28,6 +28,17 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zqq</groupId>
+            <artifactId>oj-common-file</artifactId>
+            <version>${oj-common-file.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zqq</groupId>
+            <artifactId>oj-common-elsticsearch</artifactId>
+            <version>${oj-common-elsticsearch.version}</version>
+        </dependency>
 
     </dependencies>
 

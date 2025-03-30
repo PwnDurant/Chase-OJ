@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zqq.common.core.domain.TableDataInfo;
-import com.zqq.friend.controller.manage.ExamCacheManager;
+import com.zqq.friend.manage.ExamCacheManager;
 import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
 import com.zqq.friend.domain.exam.vo.ExamVO;
 import com.zqq.friend.mapper.exam.ExamMapper;
@@ -30,15 +30,15 @@ public class ExamServiceImpl implements IExamService {
 
     @Override
     public TableDataInfo redisList(ExamQueryDTO examQueryDTO) {
-        Long listSize = examCacheManager.getListSize(examQueryDTO.getType());
+        Long listSize = examCacheManager.getListSize(examQueryDTO.getType(),null);
         List<ExamVO> examVOList = null;
         if(listSize==null||listSize==0){
             examVOList=list(examQueryDTO);
-            examCacheManager.refreshCache(examQueryDTO.getType());
+            examCacheManager.refreshCache(examQueryDTO.getType(),null);
             listSize=new PageInfo<>(examVOList).getTotal();
         }else{
-            examCacheManager.getExamVOList(examQueryDTO);
-            listSize = examCacheManager.getListSize(examQueryDTO.getType());
+            examCacheManager.getExamVOList(examQueryDTO,null);
+            listSize = examCacheManager.getListSize(examQueryDTO.getType(),null);
         }
 
         if(CollectionUtil.isEmpty(examVOList)){

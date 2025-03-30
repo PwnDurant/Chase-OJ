@@ -1,4 +1,4 @@
-package com.zqq.friend.controller.manage;
+package com.zqq.friend.manage;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
@@ -13,6 +13,7 @@ import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
 import com.zqq.friend.domain.exam.vo.ExamVO;
 import com.zqq.friend.domain.user.UserExam;
 import com.zqq.friend.mapper.exam.ExamMapper;
+import com.zqq.friend.mapper.user.UserExamMapper;
 import com.zqq.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

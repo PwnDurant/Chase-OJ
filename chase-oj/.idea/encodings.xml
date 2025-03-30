@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/oj-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oj-common/oj-common-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj-common/oj-common-elsticsearch/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj-common/oj-common-file/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oj-common/oj-common-message/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oj-common/oj-common-mybatis/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oj-common/oj-common-redis/src/main/java" charset="UTF-8" />

@@ -5,27 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zqq</groupId>
-        <artifactId>chase-oj</artifactId>
+        <artifactId>oj-common</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>oj-common</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>oj-common-core</module>
-        <module>oj-common-swagger</module>
-        <module>oj-common-security</module>
-        <module>oj-common-redis</module>
-        <module>oj-common-mybatis</module>
-        <module>oj-common-message</module>
-        <module>oj-common-elsticsearch</module>
-        <module>oj-common-file</module>
-    </modules>
+    <artifactId>oj-common-elsticsearch</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+
+    </dependencies>
 
 </project>
