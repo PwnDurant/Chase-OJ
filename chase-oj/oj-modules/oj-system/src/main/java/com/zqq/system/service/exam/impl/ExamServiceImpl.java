@@ -112,6 +112,9 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
     public int edit(ExamEditDTO examEditDTO) {
 //        判断
         Exam exam = getExam(examEditDTO.getExamId());
+        if(Constants.TRUE.equals(exam.getStatus())){
+            throw new ServiceException(ResultCode.EXAM_IS_PUBLISH);
+        }
         checkExam(exam);
         checkExamSaveParams(examEditDTO,examEditDTO.getExamId());
 
@@ -122,6 +125,7 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
     @Override
     public int questionDelete(Long examId, Long questionId) {
         Exam exam = getExam(examId);
+
         checkExam(exam);
         ExamQuestion examQuestion = examQuestionMapper.selectOne(new LambdaQueryWrapper<ExamQuestion>()
                 .eq(ExamQuestion::getExamId, examId)
@@ -137,6 +141,9 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
     @Override
     public int delete(Long examId) {
         Exam exam = getExam(examId);
+        if(Constants.TRUE.equals(exam.getStatus())){
+            throw new ServiceException(ResultCode.EXAM_IS_PUBLISH);
+        }
         checkExam(exam);
         examQuestionMapper.delete(new LambdaQueryWrapper<ExamQuestion>().eq(ExamQuestion::getExamId,examId));
 //        因为我在exam实体类中在examId上面加上了主键策略，所以在执行的时候会自动识别类中的主体

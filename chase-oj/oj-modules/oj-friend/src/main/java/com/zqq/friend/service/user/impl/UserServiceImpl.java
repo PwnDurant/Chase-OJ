@@ -1,8 +1,10 @@
 package com.zqq.friend.service.user.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.zqq.common.core.constants.CacheConstants;
 import com.zqq.common.core.constants.Constants;
 import com.zqq.common.core.constants.HttpConstants;
 import com.zqq.common.core.domain.LoginUser;
@@ -16,9 +18,13 @@ import com.zqq.common.security.exception.ServiceException;
 import com.zqq.common.security.service.TokenService;
 import com.zqq.friend.domain.user.User;
 import com.zqq.friend.domain.user.dto.UserDTO;
+import com.zqq.friend.domain.user.dto.UserUpdateDTO;
+import com.zqq.friend.domain.user.vo.UserVO;
+import com.zqq.friend.manage.UserCacheManager;
 import com.zqq.friend.mapper.user.UserMapper;
 import com.zqq.friend.service.user.IUserService;
 import com.zqq.redis.service.RedisService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -44,6 +50,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private UserCacheManager userCacheManager;
+
     @Value("${sms.code-expiration:5}")
     private Long phoneCodeExpiration;
 
@@ -55,6 +64,9 @@ public class UserServiceImpl implements IUserService {
 
     @Value("${sms.is-send:false}")
     private boolean isSend;
+
+    @Value("${file.oss.downloadUrl}")
+    private String downloadUrl;
 
 
 
@@ -141,8 +153,64 @@ public class UserServiceImpl implements IUserService {
         }
         LoginUserVO loginUserVO=new LoginUserVO();
         loginUserVO.setNickName(loginUser.getNickName());
-        loginUserVO.setHeadImage(loginUser.getHeadImage());
+        if (StrUtil.isNotEmpty(loginUser.getHeadImage())) {
+            loginUserVO.setHeadImage(downloadUrl + loginUser.getHeadImage());
+        }
         return R.ok(loginUserVO);
+    }
+
+    @Override
+    public UserVO detail() {
+        Long userId = ThreadLocalUtil.get(Constants.USER_ID, Long.class);
+        if (userId == null) {
+            throw new ServiceException(ResultCode.FAILED_USER_NOT_EXISTS);
+        }
+        UserVO userVO = userCacheManager.getUserById(userId);
+        if (userVO == null) {
+            throw new ServiceException(ResultCode.FAILED_USER_NOT_EXISTS);
+        }
+        if (StrUtil.isNotEmpty(userVO.getHeadImage())) {
+            userVO.setHeadImage(downloadUrl + userVO.getHeadImage());
+        }
+        return userVO;
+    }
+
+    @Override
+    public int edit(UserUpdateDTO userUpdateDTO) {
+        User user = isExist();
+        BeanUtil.copyProperties(userUpdateDTO,user);
+        //更新用户缓存
+        userCacheManager.refreshUser(user);
+        tokenService.refreshLoginUser(user.getNickName(),user.getHeadImage(),
+                ThreadLocalUtil.get(Constants.USER_KEY, String.class));
+        return userMapper.updateById(user);
+    }
+
+    @Override
+    public int updateHeadImage(String headImage) {
+//        先判断用户的是否存在
+        User user = isExist();
+//        设置用户头像，上传头像后返回的唯一标识
+        user.setHeadImage(headImage);
+//        更新用户缓存
+        userCacheManager.refreshUser(user);
+        tokenService.refreshLoginUser(user.getNickName(),user.getHeadImage(),
+                ThreadLocalUtil.get(Constants.USER_KEY, String.class));
+
+        return userMapper.updateById(user);
+    }
+
+    @NotNull
+    private User isExist() {
+        Long userId = ThreadLocalUtil.get(Constants.USER_ID, Long.class);
+        if (userId == null) {
+            throw new ServiceException(ResultCode.FAILED_USER_NOT_EXISTS);
+        }
+        User user = userMapper.selectById(userId);
+        if (user == null) {
+            throw new ServiceException(ResultCode.FAILED_USER_NOT_EXISTS);
+        }
+        return user;
     }
 
     private void checkCode(UserDTO userDTO) {
@@ -160,10 +228,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     private String getPhoneCodeKey(String phone) {
-        return Constants.PHONE_CODE_KEY+phone;
+        return CacheConstants.PHONE_CODE_KEY+phone;
     }
     private String getCodeTimeKey(String phone) {
-        return Constants.CODE_TIME_KEY+phone;
+        return CacheConstants.CODE_TIME_KEY+phone;
     }
 
     public static boolean checkPhone(String phone) {

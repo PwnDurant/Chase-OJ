@@ -3,12 +3,14 @@ package com.zqq.gateway.filter;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.zqq.common.core.constants.CacheConstants;
+import com.zqq.common.core.constants.Constants;
 import com.zqq.common.core.constants.HttpConstants;
 import com.zqq.common.core.domain.LoginUser;
 import com.zqq.common.core.domain.R;
 import com.zqq.common.core.enums.ResultCode;
 import com.zqq.common.core.enums.UserIdentity;
 import com.zqq.common.core.utils.JwtUtils;
+import com.zqq.common.core.utils.ThreadLocalIUtil;
 import com.zqq.gateway.properties.IgnoreWhiteProperties;
 import com.zqq.redis.service.RedisService;
 import io.jsonwebtoken.Claims;
@@ -72,7 +74,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         try {
             claims = JwtUtils.parseToken(token, secret); //获取令牌中信息  解析payload中信息  存储着用户唯一标识信息
             if (claims == null) {
-                //springcloud gateway 基于webflux
+                //springCloud gateway 基于webflux
                 return unauthorizedResponse(exchange, "令牌已过期或验证不正确！");
             }
         } catch (Exception e) {
@@ -103,6 +105,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (url.contains(HttpConstants.FRIEND_URL_PREFIX) && !UserIdentity.ORDINARY.getValue().equals(user.getIdentity())) {
             return unauthorizedResponse(exchange, "令牌验证失败");
         }
+//      由于gateway服务是单独的一个服务，与其它服务不是在一个线程中，所以就算设置了线程变量也没有用
+//        ThreadLocalIUtil.set(Constants.USER_ID,userId);
 
         return chain.filter(exchange);
     }

@@ -3,6 +3,7 @@ package com.zqq.job.handler;
 import cn.hutool.core.collection.CollectionUtil;
 import com.github.pagehelper.PageHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import com.zqq.common.core.constants.CacheConstants;
 import com.zqq.redis.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

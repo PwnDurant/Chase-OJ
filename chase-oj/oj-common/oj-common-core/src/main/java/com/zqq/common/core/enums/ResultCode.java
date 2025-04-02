@@ -40,7 +40,17 @@ public enum ResultCode {
     DONT_EXISTS                     (3207,"此题目在竞赛中不存在"),
 
     EXAM_NOT_HAS_QUESTION           (3208,"竞赛不包含题目"),
-    EXAM_IS_FINISH                  (3209,"竞赛已经结束，不能发布");
+    EXAM_IS_FINISH                  (3209,"竞赛已经结束，不能发布"),
+    EXAM_IS_PUBLISH                 (3210,"竞赛发布，不能进行编辑"),
+
+    USER_EXAM_HAS_ENTER             (3301,"用户已经报名，无需再次报名"),
+
+    FAILED_FILE_UPLOAD                  (3401, "文件上传失败"),
+
+    FAILED_FILE_UPLOAD_TIME_LIMIT       (3402, "当天上传图片数量超过上限");
+
+
+
 
 
     private int code;

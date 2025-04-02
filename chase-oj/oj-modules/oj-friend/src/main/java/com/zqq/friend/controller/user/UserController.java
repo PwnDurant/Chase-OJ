@@ -6,6 +6,8 @@ import com.zqq.common.core.controller.BaseController;
 import com.zqq.common.core.domain.R;
 import com.zqq.common.core.domain.vo.LoginUserVO;
 import com.zqq.friend.domain.user.dto.UserDTO;
+import com.zqq.friend.domain.user.dto.UserUpdateDTO;
+import com.zqq.friend.domain.user.vo.UserVO;
 import com.zqq.friend.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +52,21 @@ public class UserController extends BaseController {
     @GetMapping("/info")
     public R<LoginUserVO> info(@RequestHeader(HttpConstants.AUTHENTICATION) String token){
         return userService.info(token);
+    }
+
+
+    @GetMapping("/detail")
+    public R<UserVO> detail() {
+        return R.ok(userService.detail());
+    }
+
+    @PutMapping("/edit")
+    public R<Void> edit(@RequestBody UserUpdateDTO userUpdateDTO) {
+        return toR(userService.edit(userUpdateDTO));
+    }
+
+    @PutMapping("/head-image/update")
+    public R<Void> updateHeadImage(@RequestBody UserUpdateDTO userUpdateDTO) {
+        return toR(userService.updateHeadImage(userUpdateDTO.getHeadImage()));
     }
 }

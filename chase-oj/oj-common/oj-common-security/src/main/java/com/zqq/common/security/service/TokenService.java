@@ -53,6 +53,7 @@ public class TokenService {
      */
     public void extendToken(String token,String secret){
 
+//        先拿到对应的用户key，再进行判断
         String userKey = getUserKey(token, secret);
         if(userKey==null){
             return ;
@@ -67,7 +68,7 @@ public class TokenService {
 
     }
 
-    private String getTokenKsy(String userKey){
+    public String getTokenKsy(String userKey){
         return CacheConstants.LOGIN_TOKEN_KEY+userKey;
     }
 
@@ -80,24 +81,52 @@ public class TokenService {
 
     }
 
+    /**
+     * 获取token令牌中的用户Id
+     * @param claims 直接把token中的载荷解析出来传给方法，直接获取userId
+     * @return
+     */
+    public Long getUserId(Claims claims) {
+        if(claims==null) return null;
+        return Long.valueOf(JwtUtils.getUserId(claims));  //获取jwt中的key
+    }
 
-    private String getUserKey(String token,String secret){
+
+    /**
+     * 获取token中用户的唯一标识
+     * @param claims 再提供一种直接通过传入载荷获取userKey的方法
+     * @return
+     */
+    public String getUserKey(Claims claims){
+        if(claims==null) return null;
+        return JwtUtils.getUserKey(claims);  //获取jwt中的key
+    }
+
+    private String getUserKey(String token, String secret) {
+        Claims claims = getClaims(token, secret);
+        if (claims == null) return null;
+        return JwtUtils.getUserKey(claims);  //获取jwt中的key
+    }
+
+    /**
+     * 从token中获取载荷
+     * @param token 传入的token信息
+     * @param secret 签名
+     * @return 返回claims载荷
+     */
+    public Claims getClaims(String token, String secret) {
         Claims claims;
         try {
             claims = JwtUtils.parseToken(token, secret); //获取令牌中信息  解析payload中信息  存储着用户唯一标识信息
             if (claims == null) {
-//                TODO
-                log.error("解析token:{}出现异常，",token);
+                log.error("解析token：{}, 出现异常", token);
                 return null;
             }
         } catch (Exception e) {
-//            TODO
-            log.error("解析token:{}出现异常，",token,e);
+            log.error("解析token：{}, 出现异常", token, e);
             return null;
-
         }
-
-        return  JwtUtils.getUserKey(claims);
+        return claims;
     }
 
     public boolean deleteLoginUser(String token, String secret) {
@@ -105,4 +134,6 @@ public class TokenService {
         if(userKey==null) return false;
         return redisService.deleteObject(getTokenKsy(userKey));
     }
+
+
 }

@@ -12,8 +12,10 @@ import com.zqq.system.domain.question.Question;
 import com.zqq.system.domain.question.dto.QuestionAddDTO;
 import com.zqq.system.domain.question.dto.QuestionEditDTO;
 import com.zqq.system.domain.question.dto.QuestionQueryDTO;
+import com.zqq.system.domain.question.es.QuestionES;
 import com.zqq.system.domain.question.vo.QuestionDetailVO;
 import com.zqq.system.domain.question.vo.QuestionVO;
+import com.zqq.system.elasticsearch.QuestionRepository;
 import com.zqq.system.mapper.question.QuestionMapper;
 import com.zqq.system.service.question.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class QuestionServiceImpl implements IQuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @Override
     public List<QuestionVO> list(QuestionQueryDTO questionQueryDTO) {
@@ -46,14 +50,21 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
     @Override
-    public int add(QuestionAddDTO questionAddDTO) {
+    public boolean add(QuestionAddDTO questionAddDTO) {
         List<Question> questions = questionMapper.selectList(new LambdaQueryWrapper<Question>().eq(Question::getTitle, questionAddDTO.getTitle()));
         if(CollectionUtil.isNotEmpty(questions)){
             throw new ServiceException(ResultCode.FAILED_ALREADY_EXISTS);
         }
         Question question=new Question();
         BeanUtil.copyProperties(questionAddDTO,question);
-        return  questionMapper.insert(question);
+        int insert = questionMapper.insert(question);
+        if(insert<=0){
+            return false;
+        }
+        QuestionES questionES=new QuestionES();
+        BeanUtil.copyProperties(question,questionES);
+        questionRepository.save(questionES);
+        return true;
     }
 
     @Override
@@ -75,6 +86,10 @@ public class QuestionServiceImpl implements IQuestionService {
         }
 //        浅拷贝
         BeanUtil.copyProperties(questionEditDTO,oldQuestion);
+
+        QuestionES questionES=new QuestionES();
+        BeanUtil.copyProperties(oldQuestion,questionES);
+        questionRepository.save(questionES);
         return questionMapper.updateById(oldQuestion);
     }
 
@@ -84,6 +99,7 @@ public class QuestionServiceImpl implements IQuestionService {
         if(question==null){
             throw new ServiceException(ResultCode.FAILED_NOT_EXISTS);
         }
+        questionRepository.deleteById(questionId);
         return questionMapper.deleteById(questionId);
     }
 }

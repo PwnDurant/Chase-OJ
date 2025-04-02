@@ -7,6 +7,10 @@ import com.zqq.system.domain.exam.Exam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
+/**
+ * 竞赛缓存功能
+ */
 @Component
 public class ExamCacheManage {
 
@@ -38,5 +42,7 @@ public class ExamCacheManage {
     private String getDetailKey(Long examId) {
         return CacheConstants.EXAM_DETAIL+examId;
     }
+
+
 
 }
