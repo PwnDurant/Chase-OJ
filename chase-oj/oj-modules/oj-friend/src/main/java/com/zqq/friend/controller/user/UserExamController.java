@@ -39,7 +39,7 @@ public class UserExamController extends BaseController {
      */
     @GetMapping("/list")
     public TableDataInfo list(ExamQueryDTO examQueryDTO){
-        userExamService.list(examQueryDTO);
+        return userExamService.list(examQueryDTO);
     }
 
 }

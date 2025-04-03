@@ -12,6 +12,7 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.zqq.common.core.constants.CacheConstants;
 import com.zqq.common.core.constants.Constants;
 import com.zqq.common.core.enums.ResultCode;
+import com.zqq.common.core.utils.ThreadLocalIUtil;
 import com.zqq.common.file.config.OSSProperties;
 import com.zqq.common.file.domain.OSSResult;
 import com.zqq.common.security.exception.ServiceException;
@@ -75,7 +76,7 @@ public class OSSService {
     }
 
     private void checkUploadCount() {
-        Long userId = ThreadLocalUtil.get(Constants.USER_ID, Long.class);
+        Long userId = ThreadLocalIUtil.get(Constants.USER_ID, Long.class);
         Long times = redisService.getCacheMapValue(CacheConstants.USER_UPLOAD_TIMES_KEY, String.valueOf(userId), Long.class);
         if (times != null && times >= maxTime) {
             throw new ServiceException(ResultCode.FAILED_FILE_UPLOAD_TIME_LIMIT);
