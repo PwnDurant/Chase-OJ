@@ -21,6 +21,8 @@ public class ExamServiceImpl implements IExamService {
     private ExamMapper examMapper;
     @Autowired
     private ExamCacheManager examCacheManager;
+    @Autowired
+    private
 
     @Override
     public List<ExamVO> list(ExamQueryDTO examQueryDTO) {
