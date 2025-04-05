@@ -8,6 +8,7 @@ import com.zqq.friend.manage.ExamCacheManager;
 import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
 import com.zqq.friend.domain.exam.vo.ExamVO;
 import com.zqq.friend.mapper.exam.ExamMapper;
+import com.zqq.friend.mapper.user.UserExamMapper;
 import com.zqq.friend.service.exam.IExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class ExamServiceImpl implements IExamService {
     @Autowired
     private ExamCacheManager examCacheManager;
     @Autowired
-    private
+    private UserExamMapper userExamMapper;
 
     @Override
     public List<ExamVO> list(ExamQueryDTO examQueryDTO) {
