@@ -136,4 +136,17 @@ public class TokenService {
     }
 
 
+//    刷新用户信息缓存
+    public void refreshLoginUser(String nickName, String headImage, String userKey) {
+//        根据用户Key拿到TokenKey
+        String tokenKey=getTokenKey(userKey);
+        LoginUser loginUser = redisService.getCacheObject(tokenKey, LoginUser.class);
+        loginUser.setNickName(nickName);
+        loginUser.setHeadImage(headImage);
+        redisService.setCacheObject(tokenKey,loginUser);
+    }
+
+    public String getTokenKey(String userKey){
+        return CacheConstants.LOGIN_TOKEN_KEY+userKey;
+    }
 }

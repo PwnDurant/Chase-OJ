@@ -8,8 +8,10 @@ import com.zqq.common.core.domain.TableDataInfo;
 import com.zqq.friend.domain.question.Question;
 import com.zqq.friend.domain.question.dto.QuestionQueryDTO;
 import com.zqq.friend.domain.question.es.QuestionES;
+import com.zqq.friend.domain.question.vo.QuestionDetailVO;
 import com.zqq.friend.domain.question.vo.QuestionVO;
 import com.zqq.friend.elasticsearch.QuestionRepository;
+import com.zqq.friend.manage.QuestionCacheManage;
 import com.zqq.friend.mapper.question.QuestionMapper;
 import com.zqq.friend.service.question.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class QuestionServiceImpl implements IQuestionService {
     private QuestionRepository questionRepository;
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionCacheManage questionCacheManage;
 
     @Override
     public TableDataInfo list(QuestionQueryDTO questionQueryDTO) {
@@ -57,6 +61,43 @@ public class QuestionServiceImpl implements IQuestionService {
         List<QuestionES> questionESList = questionESPage.getContent();
         List<QuestionVO> questionVOList = BeanUtil.copyToList(questionESList, QuestionVO.class);
         return TableDataInfo.success(questionVOList,total);
+    }
+
+    @Override
+    public QuestionDetailVO detail(Long questionId) {
+//        根据questionId从elasticsearch中查处对应的题目
+        QuestionES questionES=questionRepository.findById(questionId).orElse(null);
+        QuestionDetailVO questionDetailVO=new QuestionDetailVO();
+        if(questionES!=null){
+            BeanUtil.copyProperties(questionES,questionDetailVO);
+            return questionDetailVO;
+        }
+//        走到这说明缓存里面没有对应记录，再从数据库中查找，如有就刷新到缓存里，没有就直接返回
+        Question question=questionMapper.selectById(questionId);
+        if(question==null){
+            return null;
+        }
+        refreshQuestion();
+        BeanUtil.copyProperties(question,questionDetailVO);
+        return questionDetailVO;
+    }
+
+    @Override
+    public String preQuestion(Long questionId) {
+        Long listSize=questionCacheManage.getListSize();
+        if(listSize==null||listSize<=0){
+            questionCacheManage.refreshCache();
+        }
+        return questionCacheManage.preQuestion(questionId).toString();
+    }
+
+    @Override
+    public String nextQuestion(Long questionId) {
+        Long listSize=questionCacheManage.getListSize();
+        if(listSize==null||listSize<=0){
+            questionCacheManage.refreshCache();
+        }
+        return questionCacheManage.nextQuestion(questionId).toString();
     }
 
     private void refreshQuestion() {

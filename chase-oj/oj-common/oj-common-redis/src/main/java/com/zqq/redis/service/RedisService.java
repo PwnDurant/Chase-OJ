@@ -191,7 +191,6 @@ public class RedisService {
         return redisTemplate.opsForList().remove(key, 1L, value);
     }
 
-
     public <T> Long indexOfForList(final String key, T value) {
         return redisTemplate.opsForList().indexOf(key, value);
     }
@@ -261,4 +260,5 @@ public class RedisService {
     public Long incrementHashValue(final String key, final String hKey, long delta) {
         return redisTemplate.opsForHash().increment(key, hKey, delta);
     }
+
 }

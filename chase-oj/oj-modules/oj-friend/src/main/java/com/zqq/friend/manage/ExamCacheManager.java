@@ -8,20 +8,27 @@ import com.github.pagehelper.PageHelper;
 import com.zqq.common.core.constants.CacheConstants;
 import com.zqq.common.core.constants.Constants;
 import com.zqq.common.core.enums.ExamListType;
+import com.zqq.common.core.enums.ResultCode;
+import com.zqq.common.security.exception.ServiceException;
 import com.zqq.friend.domain.exam.Exam;
+import com.zqq.friend.domain.exam.ExamQuestion;
 import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
 import com.zqq.friend.domain.exam.vo.ExamVO;
+import com.zqq.friend.domain.user.UserExam;
 import com.zqq.friend.mapper.exam.ExamMapper;
+import com.zqq.friend.mapper.exam.ExamQuestionMapper;
 import com.zqq.friend.mapper.user.UserExamMapper;
 import com.zqq.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class ExamCacheManager {
@@ -34,6 +41,8 @@ public class ExamCacheManager {
 
     @Autowired
     private UserExamMapper userExamMapper;
+    @Autowired
+    private ExamQuestionMapper examQuestionMapper;
 
     /**
      * 获取竞赛列表的长度
@@ -197,5 +206,80 @@ public class ExamCacheManager {
     public void addUserExamCache(Long userId, Long examId) {
         String userExamListKey = getUserExamListKey(userId);
         redisService.leftPushForList(userExamListKey,examId);
+    }
+
+    /**
+     * 根据用户id，拿到用户报名参加过的竞赛ID列表
+     * @param userId 用户Id
+     * @return 返回用户报名过的竞赛Id列表
+     */
+    public List<Long> getAllUserExamList(Long userId) {
+
+        String examListKey=CacheConstants.USER_EXAM_LIST+ userId;
+//        先根据用户Id查处所报名的竞赛Id列表，在缓存中
+        List<Long> userExamIdList=redisService.getCacheListByRange(examListKey,0,-1, Long.class);
+        if(CollectionUtil.isNotEmpty(userExamIdList)){
+            return userExamIdList;
+        }
+//        查处用户所报名的竞赛，在数据库中
+        List<UserExam> userExamList=userExamMapper.selectList(new LambdaQueryWrapper<UserExam>()
+                .eq(UserExam::getUserId,userId));
+        if(CollectionUtil.isEmpty(userExamList)){
+            return null;
+        }
+//        到这就说明缓存中数据和数据库中数据不一致，需要进行同步
+        refreshCache(ExamListType.USER_EXAM_LIST.getValue(),userId);
+        return userExamList.stream().map(UserExam::getExamId).toList();
+    }
+
+    public Long getFirstQuestion(Long examId) {
+        return redisService.indexForList(getExamQuestionListKey(examId),0,Long.class);
+    }
+
+    private String getExamQuestionListKey(Long examId) {
+
+        return CacheConstants.EXAM_QUESTION_LIST+examId;
+    }
+
+    public Long getExamQuestionListSize(Long examId) {
+        String examQuestionListKey=getExamQuestionListKey(examId);
+        return redisService.getListSize(examQuestionListKey);
+    }
+
+    public void refreshExamQuestionCache(Long examId) {
+        List<ExamQuestion> examQuestionList=examQuestionMapper.selectList(new LambdaQueryWrapper<ExamQuestion>()
+                .select(ExamQuestion::getQuestionId)
+                .eq(ExamQuestion::getExamId,examId)
+                .orderByAsc(ExamQuestion::getQuestionOrder));
+        if(CollectionUtil.isEmpty(examQuestionList)){
+            return;
+        }
+        List<Long> examQuestionIdList=examQuestionList.stream().map(ExamQuestion::getQuestionId).toList();
+        redisService.rightPushAll(getExamQuestionListKey(examId),examQuestionIdList);
+//        节省redis资源，放一天就行了
+        long seconds= ChronoUnit.SECONDS.between(LocalDateTime.now(),
+                LocalDateTime.now().plusDays(1).withHour(0).withMinute(0).withSecond(0).withNano(0));
+        redisService.expire(getExamQuestionListKey(examId),seconds, TimeUnit.SECONDS);
+    }
+
+    public Long preQuestion(Long examId, Long questionId) {
+
+        Long index=redisService.indexOfForList(getExamQuestionListKey(examId),questionId);
+        if(index==0){
+            throw new ServiceException(ResultCode.FAILED_FIRST_QUESTION);
+        }
+        return redisService.indexForList(getExamQuestionListKey(examId),index-1,Long.class);
+
+    }
+
+    public Long nextQuestion(Long examId, Long questionId) {
+
+        Long index=redisService.indexOfForList(getExamQuestionListKey(examId),questionId);
+        long lastIndex=getExamQuestionListSize(examId)-1;
+        if(index==lastIndex){
+            throw new ServiceException(ResultCode.FAILED_FIRST_QUESTION);
+        }
+        return redisService.indexForList(getExamQuestionListKey(examId),index+1,Long.class);
+
     }
 }

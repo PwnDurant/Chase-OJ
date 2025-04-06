@@ -12,4 +12,7 @@ public class Constants {
 
     public static final String USER_ID="user_id";
 
+    public static final String USER_KEY = "user_key";
+
+    public static final String JUDGE_SERVICE = "oj-judge";
 }

@@ -16,6 +16,7 @@ import com.zqq.system.domain.question.es.QuestionES;
 import com.zqq.system.domain.question.vo.QuestionDetailVO;
 import com.zqq.system.domain.question.vo.QuestionVO;
 import com.zqq.system.elasticsearch.QuestionRepository;
+import com.zqq.system.manage.QuestionCacheManage;
 import com.zqq.system.mapper.question.QuestionMapper;
 import com.zqq.system.service.question.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class QuestionServiceImpl implements IQuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private QuestionCacheManage questionCacheManage;
 
     @Override
     public List<QuestionVO> list(QuestionQueryDTO questionQueryDTO) {
@@ -64,6 +67,7 @@ public class QuestionServiceImpl implements IQuestionService {
         QuestionES questionES=new QuestionES();
         BeanUtil.copyProperties(question,questionES);
         questionRepository.save(questionES);
+        questionCacheManage.addCache(question.getQuestionId());
         return true;
     }
 
@@ -100,6 +104,7 @@ public class QuestionServiceImpl implements IQuestionService {
             throw new ServiceException(ResultCode.FAILED_NOT_EXISTS);
         }
         questionRepository.deleteById(questionId);
+        questionCacheManage.deleteCache(questionId);
         return questionMapper.deleteById(questionId);
     }
 }

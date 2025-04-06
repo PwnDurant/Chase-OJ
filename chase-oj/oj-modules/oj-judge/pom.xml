@@ -18,7 +18,20 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.zqq</groupId>
+            <artifactId>oj-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.docker-java</groupId>
+            <artifactId>docker-java</artifactId>
+            <version>3.3.4</version>
+        </dependency>
     </dependencies>
 
 </project>

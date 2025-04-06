@@ -70,6 +70,9 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
 //        通过传入的竞赛id判断竞赛是否存在
         Exam exam = getExam(examQuestionAddDTO.getExamId());
         checkExam(exam);
+        if(Constants.TRUE.equals(exam.getStatus())){
+            throw new ServiceException(ResultCode.EXAM_IS_PUBLISH);
+        }
 //        判断添加的题目是否存在
         LinkedHashSet<Long> questionIdSet =examQuestionAddDTO.getQuestionIdSet();
         if(CollectionUtil.isEmpty(questionIdSet)){
@@ -125,8 +128,10 @@ public class ExamServiceImpl extends ServiceImpl<ExamQuestionMapper, ExamQuestio
     @Override
     public int questionDelete(Long examId, Long questionId) {
         Exam exam = getExam(examId);
-
         checkExam(exam);
+        if(Constants.TRUE.equals(exam.getStatus())){
+            throw new ServiceException(ResultCode.EXAM_IS_PUBLISH);
+        }
         ExamQuestion examQuestion = examQuestionMapper.selectOne(new LambdaQueryWrapper<ExamQuestion>()
                 .eq(ExamQuestion::getExamId, examId)
                 .eq(ExamQuestion::getQuestionId, questionId));

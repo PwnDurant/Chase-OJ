@@ -13,6 +13,7 @@ import com.zqq.common.core.domain.vo.LoginUserVO;
 import com.zqq.common.core.enums.ResultCode;
 import com.zqq.common.core.enums.UserIdentity;
 import com.zqq.common.core.enums.UserStatus;
+import com.zqq.common.core.utils.ThreadLocalIUtil;
 import com.zqq.common.message.service.AliSmsService;
 import com.zqq.common.security.exception.ServiceException;
 import com.zqq.common.security.service.TokenService;
@@ -161,7 +162,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserVO detail() {
-        Long userId = ThreadLocalUtil.get(Constants.USER_ID, Long.class);
+        Long userId = ThreadLocalIUtil.get(Constants.USER_ID, Long.class);
         if (userId == null) {
             throw new ServiceException(ResultCode.FAILED_USER_NOT_EXISTS);
         }
@@ -182,7 +183,7 @@ public class UserServiceImpl implements IUserService {
         //更新用户缓存
         userCacheManager.refreshUser(user);
         tokenService.refreshLoginUser(user.getNickName(),user.getHeadImage(),
-                ThreadLocalUtil.get(Constants.USER_KEY, String.class));
+                ThreadLocalIUtil.get(Constants.USER_KEY, String.class));
         return userMapper.updateById(user);
     }
 
@@ -195,14 +196,14 @@ public class UserServiceImpl implements IUserService {
 //        更新用户缓存
         userCacheManager.refreshUser(user);
         tokenService.refreshLoginUser(user.getNickName(),user.getHeadImage(),
-                ThreadLocalUtil.get(Constants.USER_KEY, String.class));
+                ThreadLocalIUtil.get(Constants.USER_KEY, String.class));
 
         return userMapper.updateById(user);
     }
 
     @NotNull
     private User isExist() {
-        Long userId = ThreadLocalUtil.get(Constants.USER_ID, Long.class);
+        Long userId = ThreadLocalIUtil.get(Constants.USER_ID, Long.class);
         if (userId == null) {
             throw new ServiceException(ResultCode.FAILED_USER_NOT_EXISTS);
         }

@@ -43,6 +43,8 @@ public class ExamCacheManage {
         return CacheConstants.EXAM_DETAIL+examId;
     }
 
-
+    private String getExamQuestionListKey(Long examId){
+        return CacheConstants.EXAM_QUESTION_LIST+examId;
+    }
 
 }
