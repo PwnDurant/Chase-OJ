@@ -19,6 +19,9 @@ public class JudgeSubmitDTO {
 //    语种
     private Integer programType;
 
+//    题目id
+    private Long questionId;
+
 //    难度
     private Integer difficulty;
 

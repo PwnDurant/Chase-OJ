@@ -15,4 +15,11 @@ public class Constants {
     public static final String USER_KEY = "user_key";
 
     public static final String JUDGE_SERVICE = "oj-judge";
+
+    public static final String UNDERLINE_SEPARATOR = "_";
+
+    /**
+     * UTF-8 字符集
+     */
+    public static final String UTF8 = "UTF-8";
 }

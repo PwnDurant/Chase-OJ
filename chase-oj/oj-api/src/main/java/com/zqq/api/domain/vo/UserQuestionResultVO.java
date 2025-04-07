@@ -13,13 +13,13 @@ import java.util.List;
 public class UserQuestionResultVO {
 
 //    是否通过标识
-    private Integer result; // 0    未通过 1   通过
+    private Integer pass; // 0    未通过 1   通过
 
 //    异常信息
-    private String errorMsg;
+    private String exeMessage;
 
 //    返回信息
-    private List<UserExeResult> userExeResultVOList;
+    private List<UserExeResult> userExeResultList;
 
     @JsonIgnore
     private Integer score;

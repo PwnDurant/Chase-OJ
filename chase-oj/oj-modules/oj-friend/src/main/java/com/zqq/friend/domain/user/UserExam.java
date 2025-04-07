@@ -10,6 +10,7 @@ import com.zqq.common.core.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @TableName("tb_user_exam")
