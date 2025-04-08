@@ -6,10 +6,7 @@ import com.zqq.common.core.domain.R;
 import com.zqq.friend.domain.user.dto.UserSubmitDTO;
 import com.zqq.friend.service.user.IUserQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -30,6 +27,21 @@ public class UserQuestionController extends BaseController {
     @PostMapping("/submit")
     public R<UserQuestionResultVO> submit(@RequestBody UserSubmitDTO submitDTO){
         return userQuestionService.submit(submitDTO);
+    }
+
+    /**
+     * 使用rabbitmq进行提交代码
+     * @param userSubmitDTO
+     * @return
+     */
+    @PostMapping("/rabbit/submit")
+    public R<Void> rabbitSubmit(@RequestBody UserSubmitDTO userSubmitDTO){
+        return toR(userQuestionService.rabbitSubmit(userSubmitDTO));
+    }
+
+    @GetMapping("/exe/result")
+    public R<UserQuestionResultVO> exeResult(Long examId,Long questionId,String currentTime){
+        return R.ok(userQuestionService.exeResult(examId,questionId,currentTime));
     }
 
 }

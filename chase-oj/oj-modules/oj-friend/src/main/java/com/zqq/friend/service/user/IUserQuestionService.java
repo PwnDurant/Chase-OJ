@@ -10,4 +10,8 @@ public interface IUserQuestionService {
 
 
     R<UserQuestionResultVO> submit(UserSubmitDTO submitDTO);
+
+    boolean rabbitSubmit(UserSubmitDTO userSubmitDTO);
+
+    UserQuestionResultVO exeResult(Long examId, Long questionId, String currentTime);
 }

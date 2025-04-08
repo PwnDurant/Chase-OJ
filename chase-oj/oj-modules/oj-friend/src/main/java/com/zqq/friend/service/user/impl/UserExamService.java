@@ -46,6 +46,9 @@ public class UserExamService implements IUserExamService {
 
     @Override
     public int enter(String token, Long examId) {
+
+
+
 //        根据传入的竞赛Id从数据库中找出对应的竞赛并进行判断
         Exam exam = examMapper.selectById(examId);
         if(exam==null){

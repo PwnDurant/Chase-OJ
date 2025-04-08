@@ -14,6 +14,7 @@
         <module name="oj-common-swagger" />
         <module name="oj-common-core" />
         <module name="oj-common-security" />
+        <module name="oj-common-rabbitmq" />
         <module name="oj-gateway" />
         <module name="oj-friend" />
         <module name="oj-common-elsticsearch" />
@@ -33,6 +34,7 @@
       <module name="oj-common-file" options="-parameters" />
       <module name="oj-common-message" options="-parameters" />
       <module name="oj-common-mybatis" options="-parameters" />
+      <module name="oj-common-rabbitmq" options="-parameters" />
       <module name="oj-common-redis" options="-parameters" />
       <module name="oj-common-security" options="-parameters" />
       <module name="oj-common-swagger" options="-parameters" />
