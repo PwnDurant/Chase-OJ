@@ -21,7 +21,7 @@ import com.zqq.friend.domain.user.User;
 import com.zqq.friend.domain.user.dto.UserDTO;
 import com.zqq.friend.domain.user.dto.UserUpdateDTO;
 import com.zqq.friend.domain.user.vo.UserVO;
-import com.zqq.friend.manage.UserCacheManager;
+import com.zqq.friend.manager.UserCacheManager;
 import com.zqq.friend.mapper.user.UserMapper;
 import com.zqq.friend.service.user.IUserService;
 import com.zqq.redis.service.RedisService;

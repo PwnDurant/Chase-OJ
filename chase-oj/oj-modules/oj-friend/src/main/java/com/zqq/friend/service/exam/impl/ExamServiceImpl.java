@@ -6,11 +6,11 @@ import com.github.pagehelper.PageInfo;
 import com.zqq.common.core.constants.Constants;
 import com.zqq.common.core.domain.TableDataInfo;
 import com.zqq.common.core.utils.ThreadLocalIUtil;
-import com.zqq.friend.manage.ExamCacheManager;
+import com.zqq.friend.domain.exam.dto.ExamRankDTO;
+import com.zqq.friend.manager.ExamCacheManager;
 import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
 import com.zqq.friend.domain.exam.vo.ExamVO;
 import com.zqq.friend.mapper.exam.ExamMapper;
-import com.zqq.friend.mapper.user.UserExamMapper;
 import com.zqq.friend.service.exam.IExamService;
 import com.zqq.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +70,11 @@ public class ExamServiceImpl implements IExamService {
     public String nextQuestion(Long questionId, Long examId) {
         checkAndRefresh(examId);
         return examCacheManager.nextQuestion(examId,questionId).toString();
+    }
+
+    @Override
+    public TableDataInfo rankList(ExamRankDTO examRankDTO) {
+        return null;
     }
 
     //    查找并刷新

@@ -5,6 +5,7 @@ import com.zqq.common.core.controller.BaseController;
 import com.zqq.common.core.domain.R;
 import com.zqq.common.core.domain.TableDataInfo;
 import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
+import com.zqq.friend.domain.exam.dto.ExamRankDTO;
 import com.zqq.friend.service.exam.IExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,16 @@ public class ExamController extends BaseController {
 //        逻辑：获取竞赛中题目顺序列表    先从redis redis中没有数据就查询数据库。list 数据类型  key: e:q:l:examId  value: questionId
 //        把排在第一个的题目返回给前端
         return R.ok(examService.getFirstQuestion(examId));
+    }
+
+    /**
+     * 用户排名
+     * @param examRankDTO 传入竞赛Id
+     * @return 返回排名结果
+     */
+    @GetMapping("/rank/list")
+    public TableDataInfo rankList(ExamRankDTO examRankDTO){
+        return examService.rankList(examRankDTO);
     }
 
     /**

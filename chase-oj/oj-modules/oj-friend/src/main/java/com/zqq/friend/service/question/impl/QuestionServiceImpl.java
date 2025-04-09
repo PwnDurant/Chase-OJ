@@ -11,7 +11,7 @@ import com.zqq.friend.domain.question.es.QuestionES;
 import com.zqq.friend.domain.question.vo.QuestionDetailVO;
 import com.zqq.friend.domain.question.vo.QuestionVO;
 import com.zqq.friend.elasticsearch.QuestionRepository;
-import com.zqq.friend.manage.QuestionCacheManage;
+import com.zqq.friend.manager.QuestionCacheManage;
 import com.zqq.friend.mapper.question.QuestionMapper;
 import com.zqq.friend.service.question.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

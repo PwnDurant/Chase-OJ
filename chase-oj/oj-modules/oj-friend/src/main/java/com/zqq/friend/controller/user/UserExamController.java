@@ -4,6 +4,7 @@ import com.zqq.common.core.constants.HttpConstants;
 import com.zqq.common.core.controller.BaseController;
 import com.zqq.common.core.domain.R;
 import com.zqq.common.core.domain.TableDataInfo;
+import com.zqq.friend.aspect.CheckUserStatus;
 import com.zqq.friend.domain.exam.dto.ExamDTO;
 import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
 import com.zqq.friend.service.user.IUserExamService;
@@ -27,6 +28,7 @@ public class UserExamController extends BaseController {
      * @param examDTO 前端传给的竞赛信息 使用的是里面的竞赛Id
      * @return 插入数据库是否成功
      */
+    @CheckUserStatus
     @PostMapping("/enter")
     public R<Void> enter(@RequestHeader(HttpConstants.AUTHENTICATION) String token, @RequestBody ExamDTO examDTO){
         return toR(userExamService.enter(token, examDTO.getExamId()));

@@ -7,6 +7,7 @@ import com.zqq.system.domain.user.User;
 import com.zqq.system.domain.user.dto.UserDTO;
 import com.zqq.system.domain.user.dto.UserQueryDTO;
 import com.zqq.system.domain.user.vo.UserVO;
+import com.zqq.system.manage.UserCacheManager;
 import com.zqq.system.mapper.user.UserMapper;
 import com.zqq.system.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserCacheManager userCacheManager;
 
 
     @Override
@@ -34,6 +38,7 @@ public class UserServiceImpl implements IUserService {
             throw new ServiceException(ResultCode.FAILED_USER_NOT_EXISTS);
         }
         user.setStatus(userDTO.getStatus());
+        userCacheManager.updateStatus(user.getUserId(), userDTO.getStatus());
         return userMapper.updateById(user);
     }
 }

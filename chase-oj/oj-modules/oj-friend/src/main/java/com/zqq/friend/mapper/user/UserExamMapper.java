@@ -1,6 +1,7 @@
 package com.zqq.friend.mapper.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zqq.friend.domain.exam.vo.ExamRankVO;
 import com.zqq.friend.domain.exam.vo.ExamVO;
 import com.zqq.friend.domain.user.UserExam;
 
@@ -15,4 +16,6 @@ public interface UserExamMapper extends BaseMapper<UserExam> {
      * @return 返回查询出的竞赛列表信息
      */
     List<ExamVO> selectUserExamList(Long userId);
+
+    List<ExamRankVO> selectExamRankList(Long examId);
 }
