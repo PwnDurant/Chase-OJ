@@ -13,6 +13,8 @@ import com.zqq.common.security.exception.ServiceException;
 import com.zqq.friend.domain.exam.Exam;
 import com.zqq.friend.domain.exam.ExamQuestion;
 import com.zqq.friend.domain.exam.dto.ExamQueryDTO;
+import com.zqq.friend.domain.exam.dto.ExamRankDTO;
+import com.zqq.friend.domain.exam.vo.ExamRankVO;
 import com.zqq.friend.domain.exam.vo.ExamVO;
 import com.zqq.friend.domain.user.UserExam;
 import com.zqq.friend.mapper.exam.ExamMapper;
@@ -67,10 +69,13 @@ public class ExamCacheManager {
         String examListKey = getExamListKey(examQueryDTO.getType(),userId);
         List<Long> examIdList = redisService.getCacheListByRange(examListKey, start, end, Long.class);
 //        根据Id去查询对应的数据
-        List<ExamVO> examVOList=assembleExamVOList(examIdList);
+//        List<ExamVO> examVOList=assembleExamVOList(examIdList);
+
+//        先暂时在数据库中查询
+        List<ExamVO> examVOList=examMapper.selectExamList(examQueryDTO);
+
         if(CollectionUtil.isEmpty(examVOList)){
 //            说明redis中数据可能有问题，从数据库中查询数据，并重新刷新缓存
-//
             examVOList=getExamListByDB(examQueryDTO,userId); //从数据库中获取数据
             refreshCache(examQueryDTO.getType(),userId);
         }
@@ -119,6 +124,33 @@ public class ExamCacheManager {
     }
 
     /**
+     * 刷新考试排名缓存
+     * @param examId 竞赛列表
+     */
+    public void refreshExamRankCache(Long examId){
+        List<ExamRankVO> examRankVOList=userExamMapper.selectExamRankList(examId);
+        if(CollectionUtil.isEmpty(examRankVOList)){
+            return;
+        }
+        redisService.rightPushAll(getExamRankListKey(examId),examRankVOList);
+    }
+
+    private String getExamRankListKey(Long examId) {
+        return CacheConstants.EXAM_RANK_LIST+examId;
+    }
+
+    /**
+     * 获取考试排名列表
+     * @param examRankDTO 竞赛排名信息
+     * @return 返回考试排名列表
+     */
+    public List<ExamRankVO> getExamRankList(ExamRankDTO examRankDTO){
+        int start=(examRankDTO.getPageNum()-1)*examRankDTO.getPageSize();
+        int end=start+examRankDTO.getPageSize()-1;
+        return redisService.getCacheListByRange(getExamRankListKey(examRankDTO.getExamId()),start,end, ExamRankVO.class);
+    }
+
+    /**
      * 从数据库中查询数据
      * @param examQueryDTO  竞赛信息
      * @param userId 用户Id
@@ -134,6 +166,8 @@ public class ExamCacheManager {
             return examMapper.selectExamList(examQueryDTO);
         }
     }
+
+
 
     /**
      * 根据得到的竞赛Id列表，从缓存中获取对应的竞赛列表
@@ -153,6 +187,7 @@ public class ExamCacheManager {
         }
 //        批量从缓存中获取数据
         List<ExamVO> examVOList = redisService.multiGet(detailKeyList, ExamVO.class);
+
         CollUtil.removeNull(examVOList);
         if (CollectionUtil.isEmpty(examVOList) || examVOList.size() != examIdList.size()) {
             //说明redis中数据有问题 从数据库中查数据并且重新刷新缓存
@@ -281,5 +316,9 @@ public class ExamCacheManager {
         }
         return redisService.indexForList(getExamQuestionListKey(examId),index+1,Long.class);
 
+    }
+
+    public Long getRankListSize(Long examId) {
+        return redisService.getListSize(getExamRankListKey(examId));
     }
 }

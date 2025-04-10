@@ -179,7 +179,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public int edit(UserUpdateDTO userUpdateDTO) {
         User user = isExist();
-        BeanUtil.copyProperties(userUpdateDTO,user);
+        user.setNickName(userUpdateDTO.getNickName());
+        user.setSex(userUpdateDTO.getSex());
+        user.setSchoolName(userUpdateDTO.getSchoolName());
+        user.setMajorName(userUpdateDTO.getMajorName());
+        user.setPhone(userUpdateDTO.getPhone());
+        user.setEmail(userUpdateDTO.getEmail());
+        user.setWechat(userUpdateDTO.getWechat());
+        user.setIntroduce(userUpdateDTO.getIntroduce());
         //更新用户缓存
         userCacheManager.refreshUser(user);
         tokenService.refreshLoginUser(user.getNickName(),user.getHeadImage(),

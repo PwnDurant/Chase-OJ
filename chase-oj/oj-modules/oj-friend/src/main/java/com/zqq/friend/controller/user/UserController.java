@@ -69,4 +69,5 @@ public class UserController extends BaseController {
     public R<Void> updateHeadImage(@RequestBody UserUpdateDTO userUpdateDTO) {
         return toR(userService.updateHeadImage(userUpdateDTO.getHeadImage()));
     }
+
 }

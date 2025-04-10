@@ -43,7 +43,9 @@ public class TokenInterceptor implements HandlerInterceptor {
         Claims claims = tokenService.getClaims(token, secret);
 //        根据载荷信息，设置线程本地变量存储
         Long userId = tokenService.getUserId(claims);
+        String userKey=tokenService.getUserKey(claims);
         ThreadLocalIUtil.set(Constants.USER_ID,userId);
+        ThreadLocalIUtil.set(Constants.USER_KEY, userKey);
 //        判断是否需要对token进行延迟处理
         tokenService.extendToken(token,secret);
         return true;

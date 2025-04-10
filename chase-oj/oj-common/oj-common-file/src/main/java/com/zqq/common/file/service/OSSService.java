@@ -17,7 +17,6 @@ import com.zqq.common.file.config.OSSProperties;
 import com.zqq.common.file.domain.OSSResult;
 import com.zqq.common.security.exception.ServiceException;
 import com.zqq.redis.service.RedisService;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,6 +63,7 @@ public class OSSService {
             }
             String extName = fileName.substring(fileName.lastIndexOf(".") + 1);
             inputStream = file.getInputStream();
+//            上传文件
             return upload(extName, inputStream);
         } catch (Exception e) {
             log.error("OSS upload file error", e);
@@ -91,6 +91,7 @@ public class OSSService {
 
     private OSSResult upload(String fileType, InputStream inputStream) {
         // key pattern: file/id.xxx, cannot start with /
+//        生成唯一文件名字
         String key = prop.getPathPrefix() + ObjectId.next() + "." + fileType;
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setObjectAcl(CannedAccessControlList.PublicRead);

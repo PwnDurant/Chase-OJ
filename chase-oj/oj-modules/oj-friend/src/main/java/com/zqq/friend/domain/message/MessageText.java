@@ -3,7 +3,7 @@ package com.zqq.friend.domain.message;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.bite.common.core.domain.BaseEntity;
+import com.zqq.common.core.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 

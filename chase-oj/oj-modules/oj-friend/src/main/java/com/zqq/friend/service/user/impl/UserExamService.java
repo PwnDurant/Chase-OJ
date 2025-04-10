@@ -44,6 +44,8 @@ public class UserExamService implements IUserExamService {
     private String secret;
     @Autowired
     private ExamCacheManager examCacheManager;
+
+    @Autowired
     private UserCacheManager userCacheManager;
 
 

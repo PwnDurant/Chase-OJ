@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class QuestionQueryDTO extends PageQueryDTO {
 
-    private String keyWord;
+    private String keyword;
 
     private Integer difficulty;
 

@@ -43,7 +43,7 @@ public class QuestionServiceImpl implements IQuestionService {
         Sort createTime = Sort.by(Sort.Direction.DESC, "createTime");
         Pageable pageRequest = PageRequest.of(questionQueryDTO.getPageNum() - 1, questionQueryDTO.getPageSize(), createTime);
         Integer difficulty = questionQueryDTO.getDifficulty();
-        String keyWord = questionQueryDTO.getKeyWord();
+        String keyWord = questionQueryDTO.getKeyword();
         Page<QuestionES> questionESPage;
         if(difficulty==null&& StrUtil.isEmpty(keyWord)){
             questionESPage = questionRepository.findAll(pageRequest);
