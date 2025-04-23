@@ -64,6 +64,7 @@ public class JudgeServiceImpl implements IJudgeService {
         saveUserSubmit(judgeSubmitDTO,userQuestionResultVO);
         log.info("判题逻辑结束，判题结果为:{}",userQuestionResultVO);
         return userQuestionResultVO;
+
     }
 
     private void saveUserSubmit(JudgeSubmitDTO judgeSubmitDTO, UserQuestionResultVO userQuestionResultVO) {

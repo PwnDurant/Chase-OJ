@@ -54,7 +54,7 @@ public class ExamXxlJob {
     @XxlJob("examListOrganizeHandler")
     public void examListOrganizeHandler() {
         //  统计哪些竞赛应该存入未完赛的列表中  哪些竞赛应该存入历史竞赛列表中   统计出来了之后，再存入对应的缓存中
-        log.info("*** examListOrganizeHandler ***");
+                log.info("*** examListOrganizeHandler ***");
 
 //        	•	查询所有“未结束”的竞赛（endTime > 当前时间 且 status = 启用）；
 //	        •	选出所需字段（id、标题、开始/结束时间）；

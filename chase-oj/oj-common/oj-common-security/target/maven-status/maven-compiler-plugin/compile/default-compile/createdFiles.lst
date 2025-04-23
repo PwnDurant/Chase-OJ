@@ -1,5 +1,0 @@
-com/zqq/common/security/handler/GlobalExceptionHandler.class
-com/zqq/common/security/exception/ServiceException.class
-com/zqq/common/security/interceptor/TokenInterceptor.class
-com/zqq/common/security/service/TokenService.class
-com/zqq/common/security/config/WebMvcConfig.class

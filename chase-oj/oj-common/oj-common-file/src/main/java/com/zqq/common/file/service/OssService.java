@@ -31,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-@RefreshScope
-public class OSSService {
+@RefreshScope//配合nacos进行动态刷新
+public class OssService {
 
     @Autowired
     private OSSProperties prop;

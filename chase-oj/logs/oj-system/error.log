@@ -1,1 +1,1 @@
-22:04:51.196 [http-nio-9201-exec-10] ERROR c.z.c.s.h.GlobalExceptionHandler - [handleServiceException,43] - 请求地址'/exam/add',发生业务异常: 竞赛开始时间不能早于当前时间
+20:57:12.092 [http-nio-9201-exec-10] ERROR c.z.c.s.h.GlobalExceptionHandler - [handleServiceException,43] - 请求地址'/exam/publish',发生业务异常: 竞赛不包含题目

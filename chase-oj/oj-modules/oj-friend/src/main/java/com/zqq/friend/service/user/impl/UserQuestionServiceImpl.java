@@ -44,8 +44,10 @@ public class UserQuestionServiceImpl implements IUserQuestionService {
 
     @Autowired
     private RemoteJudgeService remoteJudgeService;
+
     @Autowired
     private JudgeProducer judgeProducer;
+
     @Autowired
     private UserSubmitMapper userSubmitMapper;
 

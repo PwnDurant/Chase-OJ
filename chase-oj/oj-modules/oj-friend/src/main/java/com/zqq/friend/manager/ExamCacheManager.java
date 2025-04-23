@@ -65,11 +65,10 @@ public class ExamCacheManager {
     public List<ExamVO> getExamVOList(ExamQueryDTO examQueryDTO,Long userId){
         int start=(examQueryDTO.getPageNum()-1)*examQueryDTO.getPageSize();
         int end=start+examQueryDTO.getPageSize()-1;     //下标需要-1
+
 //        根据开始和结束下标和key值查询redis中对应的竞赛Id
         String examListKey = getExamListKey(examQueryDTO.getType(),userId);
         List<Long> examIdList = redisService.getCacheListByRange(examListKey, start, end, Long.class);
-//        根据Id去查询对应的数据
-//        List<ExamVO> examVOList=assembleExamVOList(examIdList);
 
 //        先暂时在数据库中查询
         List<ExamVO> examVOList=examMapper.selectExamList(examQueryDTO);
